@@ -1,5 +1,3 @@
-To build this project running follow the instructions in the GET_STARTED file.
-
 Video of project in action: https://www.youtube.com/watch?v=HDl0rbA_3ew
 
 What:
