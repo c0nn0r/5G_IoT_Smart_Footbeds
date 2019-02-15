@@ -3,7 +3,7 @@ To build this project running follow the instructions in the GET_STARTED file.
 Video of project in action: https://www.youtube.com/watch?v=HDl0rbA_3ew
 
 What:
-A Prototype set of Smart Footbeds including software, hardware, and experimental 5G NB1 IoT connections for each independent footbed.
+A Prototype set of Smart Footbeds including software, hardware, and experimental 5G M1/NB1 IoT connections for each independent footbed.
 
 About:
 I was hired by the “Luminary” of Seattle-based startup JumpstartCSR (http://jumpstartcsr.com/) to develop a fully functioning prototype of their vision of 5G M1/NB1 IoT smart footbeds. The footbed concept is to connect with a cloud-based "state of the art cognitive expert ecosystem" called Holmz which "creates an integrated and connected health/wellness fitness experience aimed at optimizing physical performance while predicting and preventing the risk of muscular skeletal injury."
