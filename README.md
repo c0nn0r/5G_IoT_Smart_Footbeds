@@ -1,3 +1,5 @@
+To get this project running follow the instructions in the GET_STARTED file.
+
 What:
 A Prototype set of Smart Footbeds including software, hardware, and experimental 5G NB1 IoT connections for each independent footbed.
 
@@ -32,5 +34,3 @@ With little technical specification fro JumpstartCSR I was responsible for the e
 	•	M1/NB1 IoT Modem configuration for BELL, ROGERS, TELUS, T-Mobile USA (EDGE), & T-Mobile Netherlands.
 	•	AT commands to send data from footbeds to JumpstartCSR server.
 	•	5G IoT account management via Cisco Jasper tools.
-
-To get this project running follow the instructions in the GET_STARTED file.
