@@ -10,7 +10,7 @@ I was hired by the “Luminary” of Seattle-based startup JumpstartCSR (http://
 
 Each footbed incorporates a 10-point Force Strain Resistor (FSR) array to measure pressure across the foot in motion and at rest. The footbed also includes a 9-DOF IMU for dead-reckoning foot orientation. Data from the FSR and IMU are fused and formatted by a Python script running on a Raspberry PI before being sent to a central server over 5G IoT data connection.
 
-This was a 6 week project, with final prototype being successfully demonstrated, and selected for advancement at “Hubraum” a 5G Internet of Things incubator that is part of Deutsch Telekom’s initiative to pipeline 5G IoT demonstrators.
+This was a 6 week project, with final prototype being successfully demonstrated, and selected for advancement at “Hubraum” a 5G Internet of Things incubator that is part of Deutsch Telekom’s initiative to pipeline 5G IoT demonstrators (https://twitter.com/WTOllson/status/1056938337515106304).
 
 With little technical specification fro JumpstartCSR I was responsible for the entirety of design/build/test cycle. Deliverables included:
 
