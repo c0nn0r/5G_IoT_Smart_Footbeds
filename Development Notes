@@ -1,0 +1,849 @@
+- 2x 10 pressure sensor array LEFT
+- 2x 10 pressure sensor array RIGHT
+- 2x 9DOF LEFT
+- 2x 9DOF RIGHT
+- 4x PSU
+- 4x CPU
+- 1x LTE-M data uplink
+- 1x Verified AT CMD set (functions TBD)
+
+——
+
+- 3x mini 10 pressure sensor array LEFT
+- 3x mini 10 pressure sensor array RIGHT
+- 3x mini 9DOF LEFT
+- 3x mini 9DOF RIGHT
+- 6x mini CPU
+- 6x mini PSU
+- 6x mini LTE-M data uplink
+- 1x Verified AT CMD set
+
+
+——
+
+
+Headers
+fine wire
+snips
+good soldering station & fan
+mylar, plastic
+digital callipers
+strain sensors
+IMU
+12x cellphone battery
+12x charger
+12x AD conversion chips (adafriut - only 8 channel - https://learn.adafruit.com/bno055-absolute-orientation-sensor-with-raspberry-pi-and-beaglebone-black/hardware)
+GPIO serial headers
+UART chips
+zip ties
+glue gun
+heat shrink and shrinker
+breadboard
+?antenna?
+
+
+
+——
+
+Terminal Settings
+
+baud: 115200
+Data bits: 8
+parity: none
+Stop bits: 1
+
+emulation: Xterm
+Send Mode: Interactive
+Return Key: CR
+Delete Key: BS
+Text Pacing: wait for echo
+timestamp: off
+encoding: UTF-8
+
+On BG96 - Connect USB/RS232 to COMPORT 1
+
+
+——
+
+LINUX
+
+% echo A > /dev/cu.usbmodemfd1321 (prints A into the device)
+% screen /dev/ttyUSB0 (open a terminal session)
+% screen /dev/ttyUSB0 115200 (add baud rate)
+
+Note that if you want to detach from the terminal and CTRL-D isn't cutting it, use CTRL-A then k to kill screen.
+To exit enter tilde dot (~.).
+
+
+AT command baud rate - 115200
+??Data baud rate - 460800
+
+——
+
+
+Useful AT Commands:
+
+on power:
+
+[Connected]
+@
+RDY
+
+or
+
+RDY
+-
+POWERED DOWN
+
+————
+
+AT&F (reset to factory defaults)
+ATE set commend echo mode
+ATO Switch from command mode to data mode
++++ switch fro data mode to command mode
+
+Packet Domain Commands
+
+
+
+———
+
+Mobile Network Codes
+
+Please be aware that for the implementation with the module, you need to replace the MCC-MNC combination written in the manual with the respective AT&T/Verizon version. I did some research:
+ 
+AT&T
+	•	310 016
+ 
+Verizon
+	•	310 004
+	•	310 005
+	•	310 006
+	•	310 012 (this is the one used for LTE; should be also the one for LTE-M)
+	•	310 013
+
+——
+SSL parameters
+HTTP GET/POST
+
+—— 
+Network handshaking
+PDP Context and PDP ID
+
+
+— ERROR CODES - —  
+
+
++CME error: 30 - No Network Service
+error: 702 - HTTP(S) timeout
+error: 703 - HTTP(S) busy
+error: 705 - HTTP(S) no GET/POST requests
+error: 707 - HTTP(S) network open fail
+error: 711 - HTTP(S) URL error
+error: 719 - HTTP(S) socket closed
+error: 730 - invalid parameter
+
+—— SET URL WORKS page 10 HTTP(S)_AT_Commands_Manual
+
+AT+QHTTPURL=<URL_length>[,<timeout>]
+AT+QHTTPURL=17,60
+http://google.com<cr>
+- test: AT+QHTTPURL?
+
+need to calculate the number of bytes (characters) in the URL
+
+G3 address it: http://178.128.181.185:4000
+so, 22 bytes/characters
+so,
+
+AT+QHTTPURL=27,120
+http://178.128.181.185:5001<cr>     (grabbing port 80, not 4000)
+- test: AT+QHTTPURL?
+
+http://178.128.181.185 = 22
+
+—— Send GET REQ 
+AT+QHTTPGET
+
+—— Send POST REQ - UART
+need <request_header> set to 1; then both post header and body inputted by UART.
+AT+QHTTPPOST
+
+
+———— 
+
+ASCII Data Format:
+
+FOOTID_SYNC(nanoseconds since unix epoch)_IMUHEADING_IMUROLL_IMUPITCH_P0_P1_P2_P3_P4_P5_P6_P7_P8_P9
+
+Each foot creates a file on the server:
+
+eg.
+
+Right foot file:
+ABCR_1533238549474653595_
+.
+.
+.
+
+Left foot file:
+XYZ1L_1533238549474656215_
+.
+.
+.
+
+1024k per file as limited by HTTP POST
+1 session is a collection of time slices <= 1024KB… So 
+———
+
+linux: date +%s%N (time since epoch in nanoseconds)
+click heels together to synchpoint
+
+———
+
+using python3
+
+——
+
+Blue network LED:
+
+200ms high / 1800ms low = network searching
+1800ms high / 200ms low = Idle
+125ms high / 125ms low = data transfer
+
+—————
+
+
+currently set to LTE Cat.M1 (0)
+set to (2) for both Categories
+AT+QCFG=“IOTOPMODE”[,<MODE>[,<EFFECT>]]
+AT+QCFG="IOTOPMODE",2,1
+might need to do
+AT+QCFG="IOTOPMODE",2
+then
+AT+QCFG="IOTOPMODE",2,1
+— 
+Different APN setting
+AT+CGDCONT=1,”IP”,”rogers-core-appl1.apn”,”0.0.0.0”,1,1  (this is a valid command - settings persist after reboot)
+——
+Connect to BELL
+AT+CGDCONT=1,”IP”,”pda.bell.ca”,”0.0.0.0”,1,1  (this is a valid command - settings persist after reboot)
+Need to deactivate <cid> contextID - 
+.p157
+
+undefining the <cid>
+AT+CGDCONT=<CID>
+AT+CGDCONT=1
+then reads: 
++CGDCONT:
+
+— 
+POWER DOWN SYSTEM (preferred)
+AT+QPOWD
+——
+set roam service to AUTO
+AT+QCFG="ROAMSERVICE",255
+—— 
+Network registration statu
+AT+CREG?
+Operator Selection
+AT+COPS=? (timeout 180s)
++COPS: (1,"Bell","Bell","302610",8),(1,"TELUS","TELUS","302220",8),,(0,1,2,3,4),(0,1,2)
+ok, so I need to get a Bell or Telus SIM.
+———
+Seems to be using TELUS?
+AT+QNWINFO
++QNWINFO: "CAT-M1","302220","LTE BAND 12",5145
+———
+Chinese company is called “Horn” - they did audio equipment. They are already into intelligent footbeds.
+——
+p.200 has index of abbreviations
+ME - Mobile Equipment
+MS - Mobile Station
+TA - Terminal Adapter
+TE - Terminal Equipment
+UE - User Equipment
+PDP - packet Data Protocol
+DTR - Data terminal ready
+MT - Mobile Terminated? call/message
+MO - Mobile Originated? call/message
+BM - Broadcast type message
+——
+Aug 15th
+Registered with the IOT programs at BELL, TELUS and ROGERS.
+BG96 is certified on TELUS, and soon on BELL.
+—— Call with G2 —— 
+G2 Needs International Routing code (IRC) for CIBC
+
+September Checkpoint - 24, 25, 26, 27 th for access to facility and technicians. - week of the 23rd to be in Rotterdam.
+
+Set up meeting with G3 about being the remote guy for testing. Dry run rehearsal to use time in Rotterdam effectively.
+—
+
+Chinese sensors they are pitting together the 10 sensors.- ask them around what he sensors are and how I may gave to interface with them.  what are the reasons behind their design style. Not a priority to ask this, but good to know.
+
+I need to create a List of questions about the Rotterdam network settings.
+—
+Rogers IOT developer 
+[REDACTED]
+
+TELUS IOT developer
+[REDACTED]
+
+BELL IOT developer
+[REDACTED]
+
+——
+
+setup RasPi for IMU
+
+Update Pi and Python
+sudo apt-get update
+sudo apt-get upgrade
+sudo pip3 install —upgrade setuptools
+
+Enable I2C
+sudo apt-get install -y python-smbus (python3-smbus)
+sudo apt-get install -y i2c-tools
+sudo raspi-config (5, P5, YES)
+sudo reboot
+test: sudo i2cdetect -y 1
+
+Enable SPI
+sudo raspi-config (5, P4, YES)
+sudo reboot
+test: ls -l /dev/spidev*
+
+test both: ls /dev/i2c* /dev/spi*
+
+Install python libraries
+pip3 install RPI.GPIO
+pip3 install adafruit-blinka
+
+Enable i2c clock stretching
+sudo nano /boot/config.txt
+scroll down until you see a block similar to:
+	dtparam=i2c_arm=on
+	dtparam=i2s=on
+	dtparam=spi=on
+
+directly below it add:
+
+# Clock stretching”
+dtoverlay=i2c-gpio,i2c_gpio_delay_us=10
+
+May need larger value than 10.
+
+sudo reboot
+
+Then
+
+sudo pip3 install adafruit-circuitpython-bno055
+—— 
+i2c does not work. Get this error. Folks online say i2c timings on RasPi are buggy.
+
+My error:
+
+pi@raspberrypi:~ $ python3 bno055_simpletest.py
+Traceback (most recent call last):
+  File "bno055_simpletest.py", line 7, in <module>
+    sensor = adafruit_bno055.BNO055(i2c)
+  File "/home/pi/.local/lib/python3.5/site-packages/adafruit_bno055.py", line 123, in __init__
+    chip_id = self._read_register(_ID_REGISTER)
+  File "/home/pi/.local/lib/python3.5/site-packages/adafruit_bno055.py", line 143, in _read_register
+    i2c.write(self.buffer, end=1, stop=False)
+  File "/home/pi/.local/lib/python3.5/site-packages/adafruit_bus_device/i2c_device.py", line 102, in write
+    self.i2c.writeto(self.device_address, buf, **kwargs)
+  File "/home/pi/.local/lib/python3.5/site-packages/busio.py", line 62, in writeto
+    return self._i2c.writeto(address, memoryview(buffer)[start:end], stop)
+  File "/home/pi/.local/lib/python3.5/site-packages/adafruit_blinka/microcontroller/raspi_23/i2c.py", line 36, in writeto
+    self._i2c_bus.write_bytes(address, buffer)
+  File "/home/pi/.local/lib/python3.5/site-packages/Adafruit_PureIO/smbus.py", line 244, in write_bytes
+    self._device.write(buf)
+OSError: [Errno 5] Input/output error
+
+——
+
+Connecting bno055 via UART
+sudo raspi-config (5, P6 Serial, no login terminal over serial, yes enable serial)
+reboot
+
+sudo apt-get update
+sudo apt-get install -y build-essential python3-dev python3-smbus python3-pip git
+
+cd ~
+git clone https://github.com/adafruit/Adafruit_Python_BNO055.git
+cd Adafruit_Python_BNO055
+sudo python(3) setup.py install
+
++Disable Bluetooth
+sudo nano /boot/config.txt
+add at bottom of file:
+# Disable Bluetooth
+dtoverlay=pi3-miniuart-bt
+sudo reboot
+
+cd ~/Adafruit_Python_BNO055/examples
+nano simpletest.py
+
+uncomment and add tty
+
+bno= BNO055.BNO055(serial_port=‘/dev/ttyAMA0’, rst=18)
+
+Test:
+
+sudo python3 simpletest.py
+
+
+IMU TEST SOFTWARE
+
+
+on raspberry pi:
+
+home/pi/Adafruit_Python_BNO055/examples/simpletest.py
+
+
+——————————— 
+
+
+Connect to ROGERS WIRELESS LTE APN (BG96_AT_Commands_Manual)
+set APN:
+AT+CGDCONT=<cid>[,<PDP_type>[,<APN>[,<PDP_addr>[,<data_comp>[,<head_comp>]]]]]
+AT+CGDCONT=1,”IP”,”ltemobile.apn”,”0.0.0.0”,1,1  (this is a valid command - settings persist after reboot)
+— TEST — 
+AT+CGDCONT?
++CGDCONT: 1,"IP","LTEMOBILE.APN","0.0.0.0",1,1,0,0
+—
+CONNECT TO TELUS SPECIAL IOT SIM CARD
+
+First you may need to undefine current <CID> if you are changing to a new SIM/Service Provider.
+
+un-defining the <cid>
+AT+CGDCONT=<CID>
+AT+CGDCONT=1                			//will undefine CID=1 etc.
+then reads: 
++CGDCONT:
+— TEST — 
+AT+CGDCONT?
++CGDCONT: 1,"IP","LTEMOBILE.APN","0.0.0.0",1,1,0,0
+
+Create a CID entry:
+AT+CGDCONT=1,"IP","M2M-EAST.TELUS.IOT","0.0.0.0",1,1 (type it in, not copy paste)
+
+AT+CGDCONT=1,"IP","M2M-EAST.TELUS.IOT","0.0.0.0",1,1 (type it in, not copy paste)
+
+———
+
+RECEIVING DATA (GET) (start here for configuration. Get this working first.
+
+Connected and successfully HTTPGET script (considering previous network APN TELUS, and pre-setting google.com as http get target)
+
+
+//Example of how to send HTTP GET response.
+AT+QHTTPCFG=“contextid”,1     			//Configure the PDP context ID as 1.
+OK
+AT+QHTTPCFG=“responseheader”,1		 //Allow to output HTTP response header.
+OK
+AT+QIACT?								//Query the state of context.
+OK
+AT+QICSGP=1,1,“UNINET”,“”,“”,1 			//EXAMPLE - Configure PDP context 1. APN is “UNINET” for China Unicom.
+OK
+AT+QIACT=1							//Activate context 1.
+OK										 //Activated successfully.
+AT+QIACT?								 //Query the state of context.
++QIACT: 1,1,1,"10.7.157.1" 
+OK
+AT+QHTTPURL=23,80					//Input URL whose length is 23 bytes. (This URL is only an
+example. Please input the correct URL in practical test.)
+CONNECT http://www.sina.com.cn/		//Set the URL which will be accessed.
+OK
+AT+QHTTPGET=80						//Send HTTP GET request and the maximum response time is 80s.
+OK
++QHTTPGET: 0,200,547256				//If HTTP response header contains “CONTENT-LENGTH” information, then the <content_length> information will be reported.
+
+
+
+//Example of how to read HTTP response.
+//Solution 1: Read HTTP response information and output it via UART port.
+AT+QHTTPREAD=80
+CONNECT
+HTTP/1.1 200 OK <CR><LF> Content-Type: text/html<CR><LF> Vary: Accept-Encoding<CR><LF>
+//Read HTTP response information and output it via UART. The maximum time to wait for HTTP session to be closed is 80s.
+//HTTP response header and body.
+X-Powered-By: shci_v1.03<CR><LF>
+Server: nginx<CR><LF>
+Date: Fri, 27 Dec 2013 02:21:43 GMT<CR><LF> Last-Modified: Fri, 27 Dec 2013 02:20:01 GMT<CR><LF> Expires: Fri, 27 Dec 2013 02:22:43 GMT<CR><LF> Cache-Control: max-age=60<CR><LF>
+Age: 1<CR><LF>
+Content-Length: 547256<CR><LF>
+X-Cache: HIT from xd33-85.sina.com.cn<CR><LF> <CR><LF>
+<body>
+OK
++QHTTPREAD: 0 //Read HTTP response header and body successfully.
+
+
+//Solution 2: Read HTTP response information and store it to UFS file.
+AT+QHTTPREADFILE=“1.txt”,80 //Read HTTP response header and body and store them to “1.txt”, the maximum time to wait for HTTP session to close is
+OK
+80s.
++QHTTPREADFILE: 0 //HTTP response header and body are stored successfully.
+
+
+Getting needs to be “reset” each time for successful get.
+
+each time you do a GET it looks like:
+
+AT+QHTTPGET=80
+AT+QHTTPREAD=80
+
+if you just do redo a
+
+AT+QHTTPREAD=80
+
+you get error 705
+
+What URL are we grabbing?
+
+- test: AT+QHTTPURL?
+
+
+———
+
+Now for HTTP POST
+
+
+AT+QHTTPPOST=20,80,80
+
+eg.
+
+AT+QHTTPPOST=1000					// post 1000 characters
+0-4    1 |    0 |    0 |    0 |    0 |    0 |    4 |   26 | 5-9    0 |    0 |    0 |    0 |    0 |    0 |    5 |   27 |0-4    0 |    0 |    0 |    0 |    0 |    8 |   65 |  149 | 5-9    0 |    1 |    0 |    0 |    0 |   12 |   63 |  103 |0-4    0 |    0 |    0 |    0 |    0 |   83 |   70 |   13 | 5-9    0 |    0 |    0 |    0 |    0 |   51 |   24 |    0 |0-4    0 |    0 |    0 |    0 |  838 |   37 |   10 |   95 | 5-9    0 |    0 |    0 |    0 |    0 |    0 |   17 |   99 |0-4    0 |    0 |    0 |    0 |  948 |   81 |   96 |   98 | 5-9    0 |    0 |    0 |    0 |    0 |   55 |   58 |   31 |0-4    0 |    0 |    0 |    0 |  401 |   41 | … …
+
+OK
+
+————
+
+NETCAT netowrking
+
+ai: $ nc -l 5001
+footbed: nc 178.128.181.185 5001
+
+
+Connecting to MCP3008 ADC
+
+Install Adafruit Python MCP3008
+
+sudo apt-get install git build-essential python3-dev (May have already done this for UART IMU if you have already don the install for that)
+cd ~
+git clone https://github.com/adafruit/Adafruit_Python_MCP3008.git
+cd Adafruit_Python_MCP3008
+sudo python(3) setup.py install
+
+~/Adafruit_Python_BNO055/Adafruit_Python_MCP3008/examples:
+10FSR.py
+simpletest.py
+
+
+Server Architecture
+
+Server should maintain a listening UDP port 5001. Other UDP application can send data. Server will save to file upon quit of server.Quit/loss of client will not affect server status.
+
+
+User Architecture
+
+FOOT.py
+
+
+
+app for each foot sensor network
+
+Sets global unique foot ID
+takes start command
+Saves formatted foot session data as FOOT.txt
+Sends FOOT.txt to server over radio 
+
+RADIO.py
+
+configures radio
+sends FOOT.txt???
+
+SSH to JumpstartCSR server
+
+cdickie@178.128.181.185
+[REDACTED]
+
+—— shipping to china
+HS CODES
+
+——————————
+
+Cloning Raspberry Pi Disk Image
+
+Download “SD Card Formatter” for Mac OS or Windows
+insert SD into card reader
+Overwrite Format vs. quick format?
+
+connect SD card reader w SD card to Raspi
+run /Accessories/SD Card Copier
+
+Insert micro SD into new Raspberry pi, and you are all set!
+
+————————————— 
+
+T-MO meeting  (details of how they support SMI cards etc)
+
+3-printer in their stores? how do w drive T-MO business ins as way that drives it for us.
+
+Meeting with tech a business development people. May want to go over the questionnaire. (review the questionnaire and see what has changed).
+
+DT - Rotterdam - talk with J.S. about what the demo should be. Sense of what they might expect in October.
+
+———————— 
+Demo program:
+
+
+Power off
+Boot
+
+Check to see if connected to Modem
+Check to see connected to mobile network
+
+Mode Idle
+
+Mode Recording
+
+Mode after recording
+
+——
+
+Remote desktop (not working yet)
+Mac OS: install https://www.xquartz.org/
+
+(Make sure to change the pi user password to “raspberry” using % sudo raspi-config
+
+ssh -X pi@<pi ip address>
+[REDACTED]
+
+——— September 6th
+Data figuring
+FOOTdemo.py (unoptimized)
+Sample Rate 10Hz
+Raw Data Rate 45.6 KiB/Minute = 2,736 KiB/Hour
+Same file Zip compressed 6.1KiB = 366KiB/Hour = 4,392KiB/12hours
+
+October Size
+MCU - 65mm x 30mm x 5mm
+BG96 - 
+Battery - ?
+IMU - 
+USB UART - 
+FSR array - negligible (thin like paper)
+
+LTE-M Antenna
+https://www.adafruit.com/product/3623?gclid=EAIaIQobChMI89ObpJul3QIVluNkCh03mQVcEAQYASABEgJvH_D_BwE
+
+———
+Writing over Serial
+
+ser = serial.Serial(‘/dev/USB serial UART)
+s.write(telemetry)
+s.close()
+
+
+
+import serial
+
+UART.setup("UART1")
+
+ser = serial.Serial(port = "/dev/ttyUSB0”, baudrate=115200)
+ser.close()
+ser.open()
+if ser.isOpen():
+	print "Serial is open!"
+    ser.write("Hello World!")
+ser.close()
+
+
+
+ser.open()
+if ser.isOpen():
+	print “Sending AT Commands to BG96“
+    ser.write(“AT+QHTTPPOST=1000”) # determines how long to record for before sending
+	#pause
+    ser.write(‘ data ‘) 
+	#pause
+ser.close()
+
+
+(1)
+
+for 10 seconds do {
+write to serial
+end
+
+for 10 seconds do {
+wait
+end
+
+loop 1
+
+
+while timer < 10 
+
+
+————
+
+REALVNC
+
+[REDACTED]
+
+
+————
+
+TELUS ROAMING SIM DASHBOARD
+
+[REDACTED]
+
+————
+
+Trying to get modem to work in Seattle
+
++CGDCONT: 1,"IPV4V6","EPC.TMOBILE.COM","0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0",0,0,0,0
+
+AT+CGDCONT=1,"IP","M2M-EAST.TELUS.IOT","0.0.0.0",1,1 (type it in, not copy paste)
++CGDCONT: 1,"IPV4V6","EPC.TMOBILE.COM",""
+
++CGDCONT: 1,"IPV4V6","m2m.telus.vfus.com”,””
+
+
+>AT+CREG?
++CREG: 0,1
+>AT+CREG=1
+ok
++CREG: 1.1
+
+at+qcfg=“roamservice”,2,1   // set roaming to on, and changes to take effect immediately.
+OK
+
+Test SIM card:
+AT+CPIN?
+
+——
+Make the both L and R feet transmit at the same time. so both transmit on 0 or 5 second so that they synch.
+———
+at+cfun=1
+at+cops=1,2,”network number”,””
+AT+CREG=1
+AT+CEREG=1
+AT+CGREG=1
+then set PDP context:
+AT+CGDCONT=1,”IP”,””
+at+qiact=1
+
+———
+
+OCTOBER CHECKPOINT - 24th, 25th.
+———
+Chat with DT
+
+AT
+
+OK
+at+cfun=1.0.......
+
+OK
+at+cfun=0
+
+OK
+at+nwscanmode
+
+ERROR
+at+qcfg="nwscanmode"
+
++QCFG: "nwscanmode",1
+
+OK
+at+qcfg="nwscanmode",3,1
+
+OK
+at+qcfg="iotopomode",0,1
+
+ERROR
+at+qcfg="iotopmop
+
+ERROR
+at+qcfg="iotopmode",0,1
+
+OK
+at+qcfg="nwscanseq",020202,1
+
+OK
+at+qcfg="band"
+
++QCFG: "band",0xf,0x400a0e189f,0xa0e189f
+
+OK
+at+qcfg".
+
+ERROR
+at+qcfg="band",0,80084,0,1
+
+OK
+at+cgdcont?
+
++CGDCONT: 1,"IP","","0.0.0.0",0,0,0,0
++CGDCONT: 2,"IP","","0.0.0.0",0,0,0,0
++CGDCONT: 3,"IP","M2M.TELUS.VFUS.COM","0.0.0.0",0,0,0,0
++CGDCONT: 4,"IP","","0.0.0.0",0,0,0,0
++CGDCONT: 5,"IP","M2M.TELUS.VFUS.COM","0.0.0.0",0,0,0,0
+
+OK
+at+cereg=4
+
+OK
+at+cscon=1
+
+ERROR
+at+qcscon=1
+
+OK
+at+cfun=1
+
+OK
+
++CEREG: 5,"42","8","70940A",8,,,"00000000","01100000"
+at+qiact=1
+
+OK
+at+qiact=..
+
+ERROR
+at+qiact?
+
++QIACT: 1,1,1,"10.122.20.141"
+
+OK
+at+cgpaddr=1
+
++CGPADDR: 1,10.122.20.141
+
+OK
+at+qiopen=1,0,"UDP","85.214.66.173",16666
+
+OK
+
++QIOPEN: 0,0
+at+qisendex=0,"313233"
+
+SEND OK
+
++QIURC: "recv",0
+at+qird=0
+
++QIRD: 3
+123
+
+OK
+
+—————
+(1) Request to build beyond spec for 1st milestone
+(2) Late payment  - “I’ve worked hard to get things in on time for you, but you have not done the same for me.”
