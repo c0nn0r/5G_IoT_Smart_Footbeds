@@ -1,0 +1,95 @@
+(5) BG96 Modem Configuration (using $ screen)
+
+USEFUL REFERENCE : Quectel_BG96_HTTP(S)_AT_Commands_Manual_V1.0.pdf
+
+TMO engineers will be on site to help with modem configuration before demo (as per their notice of ~Aug. 16th)
+
+We may need to manually re-configure the modem connection settings when changing SIM cards. We will use the $ screen command to do this.
+
+$ screen /dev/ttyUSB0 115200
+
+This will open a live serial terminal session allowing you to issue commands directly to the BG96.
+
+CAUTION: after using the screen command it is necessary to reboot the RasPi in order to allow subsequent FOOTdemoLEFTs.py to access modem.
+
+
+(5.1) Terminal Settings (if needed)
+
+baud: 115200
+Data bits: 8
+parity: none
+Stop bits: 1
+
+emulation: Xterm
+Send Mode: Interactive
+Return Key: CR
+Delete Key: BS
+Text Pacing: wait for echo
+timestamp: off
+encoding: UTF-8
+
+On BG96 - Connect USB/RS232 to COMPORT 1. There are 2 COM ports on the BG96, Make sure you are using port 1, not port 2 which is the debug port.
+
+(5.2) Connection Strategy
+
+Network:
+
+First we check to see what the current modem configuration, and connections are set to. Then we identify the network we would like to connect to. If needed we reset the current network context, then enter the new context selection.
+
+We will use $ screen command to do all this. Only needs to be done once per network connection.
+
+
+Check Network registration status
+>AT+CREG?
+Check Operator Selection
+>AT+COPS=? (timeout 180s)
+check current network info
+
+>AT+QNWINFO
+
+
+Server:
+
+We set the URL we will be using to send data. First we need to calculate the number of bytes (characters) in the URL
+
+Address is: http://178.128.181.185:5002
+so, 27 bytes/characters
+so,
+
+AT+QHTTPURL=27,60 (bytes/chars, 60 second timeout)
+http://178.128.181.185:5001<cr>
+- test: AT+QHTTPURL? should return our URL.
+
+
+(5.3) CONNECT WITH TELUS SPECIAL IOT SIM CARD (will be similar for other networks)
+
+First you may need to undefine current <CID> if you are changing to a new SIM/Service Provider.
+undefining the <cid>
+>AT+CGDCONT=<CID>
+>AT+CGDCONT=1                			//will undefine CID=1 etc.
+then reads: 
++CGDCONT:
+— TEST — 
+>AT+CGDCONT?
++CGDCONT: 1,"IP","LTEMOBILE.APN","0.0.0.0",1,1,0,0
+
+Create a CID entry:
+>AT+CGDCONT=1,"IP","M2M-EAST.TELUS.IOT","0.0.0.0",1,1 (type it in, not copy paste)
+>AT+CGDCONT=2,”IP","M2M-EAST.TELUS.IOT","0.0.0.0",1,1 (type it in, not copy paste)
+
+Choose/Enable a CID entry
+
+
+
+
+Now for HTTP POST
+
+
+AT+QHTTPPOST=20,80,80
+
+eg.
+
+AT+QHTTPPOST=1000					// post 1000 characters
+0-4    1 |    0 |    0 |    0 |    0 |    0 |    4 |   26 | 5-9    0 |    0 |    0 |    0 |    0 |    0 |    5 |   27 |0-4    0 |    0 |    0 |    0 |    0 |    8 |   65 |  149 | 5-9    0 |    1 |    0 |    0 |    0 |   12 |   63 |  103 |0-4    0 |    0 |    0 |    0 |    0 |   83 |   70 |   13 | 5-9    0 |    0 |    0 |    0 |    0 |   51 |   24 |    0 |0-4    0 |    0 |    0 |    0 |  838 |   37 |   10 |   95 | 5-9    0 |    0 |    0 |    0 |    0 |    0 |   17 |   99 |0-4    0 |    0 |    0 |    0 |  948 |   81 |   96 |   98 | 5-9    0 |    0 |    0 |    0 |    0 |   55 |   58 |   31 |0-4    0 |    0 |    0 |    0 |  401 |   41 | … …
+
+OK
