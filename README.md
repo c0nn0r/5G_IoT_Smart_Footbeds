@@ -12,7 +12,7 @@ Each footbed incorporates a 10-point Force Strain Resistor (FSR) array to measur
 
 This was a 6 week project, with final prototype being successfully demonstrated, and selected for advancement at “Hubraum” a 5G Internet of Things incubator that is part of Deutsch Telekom’s initiative to pipeline 5G IoT demonstrators (https://twitter.com/WTOllson/status/1056938337515106304).
 
-With little technical specification fro JumpstartCSR I was responsible for the entirety of design/build/test cycle. Deliverables included:
+With very limited technical specification from JumpstartCSR I was responsible for the entirety of design/build/test cycle on a very short timeline. Deliverables included:
 
 (1) Hardware
 
