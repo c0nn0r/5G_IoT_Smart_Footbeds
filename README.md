@@ -6,7 +6,7 @@ What:
 A Prototype set of Smart Footbeds including software, hardware, and experimental 5G M1/NB1 IoT connections for each independent footbed.
 
 About:
-I was hired by the “Luminary” of Seattle-based startup JumpstartCSR (http://jumpstartcsr.com/) to develop a fully functioning prototype of their vision of 5G M1/NB1 IoT smart footbeds. The footbed concept is to connect with a cloud-based "state of the art cognitive expert ecosystem" called Holmz which "creates an integrated and connected health/wellness fitness experience aimed at optimizing physical performance while predicting and preventing the risk of muscular skeletal injury."
+I was hired as a consultant by the “Luminary” of Seattle-based startup JumpstartCSR (http://jumpstartcsr.com/) to develop a fully functioning prototype of their vision of 5G M1/NB1 IoT smart footbeds. The footbed concept is to connect with a cloud-based "state of the art cognitive expert ecosystem" called Holmz which "creates an integrated and connected health/wellness fitness experience aimed at optimizing physical performance while predicting and preventing the risk of muscular skeletal injury."
 
 Each footbed incorporates a 10-point Force Strain Resistor (FSR) array to measure pressure across the foot in motion and at rest. The footbed also includes a 9-DOF IMU for dead-reckoning foot orientation. Data from the FSR and IMU are fused and formatted by a Python script running on a Raspberry PI before being sent to a central server over 5G IoT data connection.
 
