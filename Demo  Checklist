@@ -1,0 +1,457 @@
+Index:
+
+(1) Demo Checklist
+(2) How to Launch Demo
+(3) FOOTdemoLEFTs.py Terminal Output
+(4) FOOTdemoLEFTs.py Server Output
+(5) BG96 Modem Configuration
+(6) Remote Access
+(7) Troubleshooting 
+
+
+ATTENTION:
+
+There are some critical last-minute changes made to this document. Names of scripts have changed, and there is an additional python script for the RIGHT foot.
+
+Main application names are now:
+
+FOOTdemoLEFTs.py and FOOTdemoRIGHT.py
+
+
+
+(1) Demo Checklist:
+
+
+(1.1) LEFT
+
+SUPPLIED by CONNOR
+LEFT Case
+LEFT Footbed with 40 pin ribbon cable & connector
+LEFT RS232 cable
+LEFT RasPi
+LEFT RasPi power
+LEFT 16GB micro SD Card (OS/Software pre-installed/configured, pre-inserted into RasPi) & SD adapter
+LEFT TELUS SIM
+
+YOU NEED TO SUPPLY
+LEFT BG96
+LEFT BG96 power
+—
+LEFT HDMI cable
+LEFT HDMI Monitor
+LEFT USB keyboard
+LEFT USB mouse
+(All can be swapped between feet)
+—
+May need: European Power Adapters
+1 for RasPi
+1 for BG96
+
+(1.2) RIGHT
+
+SUPPLIED by CONNOR
+RIGHT Case
+RIGHT Footbed with 40 pin ribbon cable & connector
+RIGHT RS232 cable
+RIGHT RasPi
+RIGHT RasPi power
+RIGHT 16GB micro SD Card (OS/Software pre-installed/configured, pre-inserted into RasPi) & SD adapter
+RIGHT TELUS SIM
+
+YOU NEED TO SUPPLY
+RIGHT BG96
+RIGHT BG96 power
+—
+RIGHT HDMI cable
+RIGHT HDMI Monitor
+RIGHT USB keyboard
+RIGHT USB mouse
+(All can be swapped between feet)
+—
+May need: European Power Adapters
+1 for RasPi
+1 for BG96
+
+
+** This list does not take into account server, or iPad requirements.
+
+
+—————
+
+(2) How to launch DEMO
+
+(2.1) Connect Raspi to:
+
+Connect RasPi to:
+- keyboard
+- mouse
+- monitor
+- BG96 via USB/RS232 cable
+- CAUTION: do not connect power yet. Attaching power to RasPi turns it on.
+
+There are available ports on the case to accommodate these cables.
+
+(2.2) Connect to network with BG96
+
+- Connect power to BG96 (BG96 should have antennae attached)
+- Throw power switch on BG96
+- Press and hold power button for 3 seconds, then release
+- Check for Blue light - off/300ms, on/2000ms (we may not see this light pattern when you insert your SIM cards. We will then need to use the $ screen command (listed below) to configure modem.
+
+(2.3) Connect Cardboard Footbed to RasPi using 40 pin flat ribbon cable/connector
+
+The Footbed has a flat cable with a connector at the other end. This connector mates with the unpopulated 40 pin receptacle inside the Case. There is a port in the case to allow the cable to exit the case.
+CAUTION: Do not use too much force when mating the cable to the receptacle. It will make it difficult to remove. Be firm, but with light pressure.
+
+(2.4) Start FOOTdemoLEFTs.py script on RasPi
+
+- Connect power to RasPi:
+- Wait for RasPi to boot to desktop
+- open Terminal, then type:
+
+- $ cd FOOT <press enter>
+- $ python3 FOOTdemoLEFTs.py <press enter>
+
+- FOOTdemoLEFTs.py now sending data to server
+- press CTRL-c to quit (quit only during 5-second pause)
+
+Repeat on other FOOT.
+
+(2.4) FOOTdemoLEFTs.py User Experience
+
+CAUTION: Please do not stand on the cardboard footbeds. Use your hands to demonstrate functionality.
+CAUTION: Please avoid bending the footbed.
+CAUTION: Please be mindful of the flat ribbon connector. Do not place too much force or strain on it.
+
+
+—————
+
+(3) FOOTdemoLEFTs.py terminal output: This is what you will see on the RasPi screen in the Terminal app.
+
+a) Sends data for ~8 seconds, pauses for ~5 seconds, Sends data for ~8 seconds, repeat…
+b) Initial loop has a delay of about 12 seconds (modem config) before sending data, then we will have new data coming in every 5 seconds, and lasting for ~8 second bursts.
+c) Data send and pause durations can be configured before runtime via editing values in the FOOTdemoLEFTs.py script.
+
+
+pi@raspberrypi:~/FOOT $ python3 FOOTdemoLEFTs.py
+/dev/ttyUSB0
+b'>>> at+qhttpurl?\r\r\n'
+LEFTFOOT printing to serial 1
+printing to serial 2
+printing to serial 3
+printing to serial 4
+printing to serial 5
+printing to serial 6
+printing to serial 7
+printing to serial 8
+printing to serial 9
+printing to serial 10
+printing to serial 11
+printing to serial 12
+printing to serial 13
+printing to serial 14
+printing to serial 15
+printing to serial 16
+printing to serial 17
+printing to serial 18
+printing to serial 19
+printing to serial 20
+printing to serial 21
+printing to serial 22
+printing to serial 23
+printing to serial 24
+printing to serial 25
+printing to serial 26
+printing to serial 27
+printing to serial 28
+printing to serial 29
+printing to serial 30
+printing to serial 31
+printing to serial 32
+printing to serial 33
+printing to serial 34
+printing to serial 35
+printing to serial 36
+printing to serial 37
+printing to serial 38
+printing to serial 39
+printing to serial 40
+printing to serial 41
+printing to serial 42
+printing to serial 43
+printing to serial 44
+printing to serial 45
+printing to serial 46
+printing to serial 47
+printing to serial 48
+printing to serial 49
+printing to serial 50
+printing to serial 51
+printing to serial 52
+printing to serial 53
+printing to serial 54
+printing to serial 55
+printing to serial 56
+printing to serial 57
+printing to serial 58
+printing to serial 59
+printing to serial 60
+printing to serial 61
+printing to serial 62
+printing to serial 63
+printing to serial 64
+printing to serial 65
+printing to serial 66
+printing to serial 67
+printing to serial 68
+printing to serial 69
+printing to serial 70
+printing to serial 71
+printing to serial 72
+printing to serial 73
+printing to serial 74
+waiting for 5 seconds, then sending more data.
+LEFTFOOT printing to serial 1
+printing to serial 2
+printing to serial 3
+printing to serial 4
+printing to serial 5
+printing to serial 6
+printing to serial 7
+printing to serial 8
+printing to serial 9
+printing to serial 10
+printing to serial 11
+printing to serial 12
+printing to serial 13
+printing to serial 14
+printing to serial 15
+printing to serial 16
+printing to serial 17
+printing to serial 18
+printing to serial 19
+printing to serial 20
+printing to serial 21
+printing to serial 22
+printing to serial 23
+printing to serial 24
+printing to serial 25
+printing to serial 26
+printing to serial 27
+printing to serial 28
+printing to serial 29
+printing to serial 30
+printing to serial 31
+printing to serial 32
+printing to serial 33
+printing to serial 34
+printing to serial 35
+printing to serial 36
+printing to serial 37
+printing to serial 38
+printing to serial 39
+printing to serial 40
+printing to serial 41
+printing to serial 42
+printing to serial 43
+printing to serial 44
+printing to serial 45
+printing to serial 46
+printing to serial 47
+printing to serial 48
+printing to serial 49
+printing to serial 50
+printing to serial 51
+printing to serial 52
+printing to serial 53
+printing to serial 54
+printing to serial 55
+printing to serial 56
+printing to serial 57
+printing to serial 58
+printing to serial 59
+printing to serial 60
+printing to serial 61
+printing to serial 62
+printing to serial 63
+printing to serial 64
+printing to serial 65
+printing to serial 66
+printing to serial 67
+printing to serial 68
+printing to serial 69
+printing to serial 70
+printing to serial 71
+printing to serial 72
+printing to serial 73
+printing to serial 74
+waiting for 5 seconds, then sending more data.
+…
+
+—————
+
+(4) FOOTdemoLEFTs.py server output: This is the format of the data being sent to the server. Your version is configured to port 5002.
+
+cdickie@holmz-lte-m:~$ nc -l -p 5001
+POST / HTTP/1.1
+Host: 178.128.181.185:5001
+Accept: */*
+User-Agent: QUECTEL_MODULE
+Connection: Keep-Alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 5555
+
+  L1536713636.5205486a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713636.6485908a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713636.7744677a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713636.9000182a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713637.0295153a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713637.1558294a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713637.2814682a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713637.4126174a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713637.5403671a  0b  0c  0d  0e  0f  0g  0h  0i  0j  2x-0.01y0.01z0.18w0.98  L1536713637.6662114a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713637.7917678a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713637.921029a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713638.0467684a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713638.1723807a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713638.3016653a  0b  0c  0d  0e  0f  0g  0h  0i  2j  0x-0.01y0.01z0.18w0.98  L1536713638.427428a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713638.5528886a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713638.6824687a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713638.808154a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713638.9337654a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713639.0658698a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713639.1931412a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713639.3189023a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713639.444517a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713639.573693a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713639.6992557a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713639.8248303a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713639.9542658a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713640.0800545a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713640.205873a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713640.3349555a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713640.4607227a  1b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713640.5862064a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713640.718109a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713640.84589a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713640.971628a  0b  2c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713641.0972319a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713641.2264657a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713641.352215a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713641.4778113a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713641.6070728a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713641.7330606a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713641.858639a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713641.987636a  0b  0c  0d  0e  0f  1g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713642.113597a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713642.2391973a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713642.3707569a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713642.4984639a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713642.6243157a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713642.7499754a  0b  0c  0d  0e  0f  1g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713642.8790278a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713643.0048459a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713643.1304634a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713643.2596557a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713643.3854685a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713643.5110114a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713643.640339a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713643.766296a  0b  0c  0d  0e  0f  3g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713643.8918593a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713644.0235913a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713644.1514235a  0b  0c  0d  0e  0f  0g  1h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713644.276971a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713644.402485a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713644.5318775a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713644.6576185a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713644.78328a  0b  0c  0d  0e  0f  0g  0h  0i  3j  0x-0.01y0.01z0.18w0.98  L1536713644.9124656a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713645.0382752a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.9
+cdickie@holmz-lte-m:~$ nc -l -p 5001
+POST / HTTP/1.1
+Host: 178.128.181.185:5001
+Accept: */*
+User-Agent: QUECTEL_MODULE
+Connection: Keep-Alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 5555
+
+  L1536713652.6877701a  1b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713652.815148a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713652.9408827a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713653.0664122a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713653.195848a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713653.3216527a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713653.4472106a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713653.5764303a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713653.7021744a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713653.8277912a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713653.9569697a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713654.0828996a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713654.208616a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713654.3400586a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713654.4678228a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713654.5936048a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713654.719062a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713654.848375a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713654.9740214a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713655.0998607a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713655.2290537a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713655.3548582a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713655.4817448a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713655.6095328a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713655.7356a  0b  0c  0d  0e  0f  1g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713655.8611698a  0b  0c  0d  0e  0f  0g  0h  2i  0j  0x-0.01y0.01z0.18w0.98  L1536713655.992773a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713656.1204157a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713656.2462127a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713656.371817a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713656.5010426a  0b  0c  0d  0e  0f  0g  0h  0i  1j  0x-0.01y0.01z0.18w0.98  L1536713656.6270244a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713656.7525656a  0b  0c  5d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713656.8814902a  0b  0c  0d  0e  0f  0g  2h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713657.0073247a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713657.1328514a  0b  7c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713657.2623563a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713657.3883996a  5b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713657.5140824a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713657.64535a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713657.7733161a  0b  2c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713657.8987207a  0b  0c  0d  0e  1f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713658.0243585a  0b  6c  0d  0e  0f  1g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713658.1539648a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713658.2795224a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713658.4051642a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713658.5343235a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713658.660067a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713658.7856958a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713658.9149342a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713659.040853a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713659.1663675a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713659.2982125a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713659.4257402a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713659.5514688a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713659.6772199a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713659.8063443a  0b  0c  0d  0e  1f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713659.932119a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713660.0576806a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713660.1868286a  3b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713660.312696a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713660.4383218a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713660.5676408a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713660.693607a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713660.8191783a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713660.9507415a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713661.0785165a  0b  1c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713661.204627a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0
+cdickie@holmz-lte-m:~$ nc -l -p 5001
+POST / HTTP/1.1
+Host: 178.128.181.185:5001
+Accept: */*
+User-Agent: QUECTEL_MODULE
+Connection: Keep-Alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 5555
+
+  L1536713668.8517785a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713668.9774146a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713669.1033137a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713669.2323153a  0b  0c  0d  0e  0f  1g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713669.3583465a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713669.4839313a  0b  9c  0d  0e  0f  0g  1h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713669.615824a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713669.7431839a  0b  0c  0d  0e  0f  4g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713669.8688588a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713669.9944706a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713670.1237586a  0b  0c  0d  0e  0f  0g  3h  0i  0j  1x-0.01y0.01z0.18w0.98  L1536713670.2495277a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713670.3751187a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713670.5042155a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713670.6300328a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713670.7556887a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713670.8850722a  0b  0c  0d  0e  1f  0g  0h  1i  0j  0x-0.01y0.01z0.18w0.98  L1536713671.011024a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713671.1365051a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713671.2683935a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713671.3959715a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713671.5217986a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713671.6474075a  0b  0c  1d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713671.7767403a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713671.902436a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713672.0280411a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713672.157455a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713672.2833567a  0b  0c  0d  0e  0f  1g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713672.4090347a  0b  0c  0d  0e  0f  0g  0h  0i  1j  0x-0.01y0.01z0.18w0.98  L1536713672.5382273a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713672.6642153a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713672.7898905a  0b  1c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713672.921421a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713673.0493963a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713673.1748915a  0b  0c  0d  0e  1f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713673.300456a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713673.4298065a  0b  0c  0d  0e  0f  0g  1h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713673.555591a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713673.6812272a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713673.81038a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713673.9360914a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713674.0616386a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713674.1911905a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713674.317283a  5b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713674.442961a  0b  0c  7d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713674.5744827a  0b  1c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713674.7019334a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713674.8278432a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713674.9533894a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713675.082617a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713675.2084036a  0b  0c  0d  0e  0f  0g  0h  0i  2j  0x-0.01y0.01z0.18w0.98  L1536713675.3339815a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713675.46331a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713675.5890357a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713675.7148027a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713675.8440332a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713675.9699717a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713676.0957372a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713676.227195a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713676.355002a  0b  0c  0d  0e  0f  0g  3h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713676.4807801a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713676.6062732a  0b  0c  0d  0e  0f  0g  0h  0i  4j  0x-0.01y0.01z0.18w0.98  L1536713676.735665a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713676.8613217a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713676.9868548a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713677.1162925a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713677.2421174a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w0.98  L1536713677.3676305a  0b  0c  0d  0e  0f  0g  0h  0i  0j  0x-0.01y0.01z0.18w
+…
+
+Right FOOT will have leading R instead of L.
+
+
+—————
+
+(5) BG96 Modem Configuration (using $ screen)
+
+USEFUL REFERENCE : Quectel_BG96_HTTP(S)_AT_Commands_Manual_V1.0.pdf
+
+TMO engineers will be on site to help with modem configuration before demo (as per their notice of ~Aug. 16th)
+
+We may need to manually re-configure the modem connection settings when changing SIM cards. We will use the $ screen command to do this.
+
+$ screen /dev/ttyUSB0 115200
+
+This will open a live serial terminal session allowing you to issue commands directly to the BG96.
+
+CAUTION: after using the screen command it is necessary to reboot the RasPi in order to allow subsequent FOOTdemoLEFTs.py to access modem.
+
+
+(5.1) Terminal Settings (if needed)
+
+baud: 115200
+Data bits: 8
+parity: none
+Stop bits: 1
+
+emulation: Xterm
+Send Mode: Interactive
+Return Key: CR
+Delete Key: BS
+Text Pacing: wait for echo
+timestamp: off
+encoding: UTF-8
+
+On BG96 - Connect USB/RS232 to COMPORT 1. There are 2 COM ports on the BG96, Make sure you are using port 1, not port 2 which is the debug port.
+
+(5.2) Connection Strategy
+
+Network:
+
+First we check to see what the current modem configuration, and connections are set to. Then we identify the network we would like to connect to. If needed we reset the current network context, then enter the new context selection.
+
+We will use $ screen command to do all this. Only needs to be done once per network connection.
+
+
+Check Network registration status
+>AT+CREG?
+Check Operator Selection
+>AT+COPS=? (timeout 180s)
+check current network info
+
+>AT+QNWINFO
+
+
+Server:
+
+We set the URL we will be using to send data. First we need to calculate the number of bytes (characters) in the URL
+
+Address is: http://178.128.181.185:5002
+so, 27 bytes/characters
+so,
+
+AT+QHTTPURL=27,60 (bytes/chars, 60 second timeout)
+http://178.128.181.185:5001<cr>
+- test: AT+QHTTPURL? should return our URL.
+
+
+(5.3) CONNECT WITH TELUS SPECIAL IOT SIM CARD (will be similar for other networks)
+
+First you may need to undefine current <CID> if you are changing to a new SIM/Service Provider.
+undefining the <cid>
+>AT+CGDCONT=<CID>
+>AT+CGDCONT=1                			//will undefine CID=1 etc.
+then reads: 
++CGDCONT:
+— TEST — 
+>AT+CGDCONT?
++CGDCONT: 1,"IP","LTEMOBILE.APN","0.0.0.0",1,1,0,0
+
+Create a CID entry:
+>AT+CGDCONT=1,"IP","M2M-EAST.TELUS.IOT","0.0.0.0",1,1 (type it in, not copy paste)
+>AT+CGDCONT=2,”IP","M2M-EAST.TELUS.IOT","0.0.0.0",1,1 (type it in, not copy paste)
+
+Choose/Enable a CID entry
+
+
+
+
+Now for HTTP POST
+
+
+AT+QHTTPPOST=20,80,80
+
+eg.
+
+AT+QHTTPPOST=1000					// post 1000 characters
+0-4    1 |    0 |    0 |    0 |    0 |    0 |    4 |   26 | 5-9    0 |    0 |    0 |    0 |    0 |    0 |    5 |   27 |0-4    0 |    0 |    0 |    0 |    0 |    8 |   65 |  149 | 5-9    0 |    1 |    0 |    0 |    0 |   12 |   63 |  103 |0-4    0 |    0 |    0 |    0 |    0 |   83 |   70 |   13 | 5-9    0 |    0 |    0 |    0 |    0 |   51 |   24 |    0 |0-4    0 |    0 |    0 |    0 |  838 |   37 |   10 |   95 | 5-9    0 |    0 |    0 |    0 |    0 |    0 |   17 |   99 |0-4    0 |    0 |    0 |    0 |  948 |   81 |   96 |   98 | 5-9    0 |    0 |    0 |    0 |    0 |   55 |   58 |   31 |0-4    0 |    0 |    0 |    0 |  401 |   41 | … …
+
+OK
+
+
+
+—————
+
+(6) Remote Access to RasPi
+
+I will be able to remotely access the RasPi via both VNC and SSH, but I may need you to do some local configuration of your router.
+
+a) Configure router to open, and forward ports 22 (SSH) and 5900 (VNC) to the local network address of the RasPi
+b) Tell me your IP address by visiting www.whatismyip.com. I will then be able to connect remotely.
+
+Once we have figured out the settings for one FOOT, we can use the same settings on the other FOOT.
+
+Because both Pi’s are they same, the would both respond to SSH request if both on the same network. So we must turn one Pi off while we configure the other, and vice-versa.
+
+
+—————
+
+(7) Troubleshooting:
+
+a) May see an error regarding a traceback that leads to the Adafruit_BNO055.
+SOLUTION: restart FOOTdemoLEFTs.py
+
+b) Loss signal from single (or more) FSR pad - recommend interpolating data from nearby sensors and faking it in the demo. Risk destroying other FSR sensors when trying to fix one by opening footbed.
+
+c) no signals: make sure ribbon cables are seated firmly
+
+d) Weird behaviour: Footbed is connected to wrong box
+
+e) Connor’s Cell # [REDACTED]
