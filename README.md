@@ -33,7 +33,7 @@ With little technical specification fro JumpstartCSR I was responsible for the e
 	•	Linux Environment Preparation
 	•	Python script
 
-(4) 5G Network (M1/NB1 IoT)
+(4) 5G Network (Quectel LTE BG96 M1/NB1 IoT modem)
 
 	•	M1/NB1 IoT Modem configuration for BELL, ROGERS, TELUS, T-Mobile USA (EDGE), & T-Mobile Netherlands.
 	•	AT commands to send data from footbeds to JumpstartCSR server.
