@@ -1,5 +1,3 @@
-# 5G_IoT_SmartFootbeds
-
 What:
 A Prototype set of Smart Footbeds including software, hardware, and experimental 5G NB1 IoT connections for each independent footbed.
 
